@@ -43,7 +43,7 @@ import (
 
 	// check exists bucket AWS S3
 	//aws.AssertS3BucketExists(t, awsRegion, bucketID)
-	assert.Contains(t, bucketID, "bucket-s3")
+	assert.Contains(t, bucketID, "Flugel")
 	// check exists instance EC2
 	assert.Contains(t, instanceID, "Flugel")
   }

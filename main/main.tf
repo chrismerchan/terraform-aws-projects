@@ -19,7 +19,7 @@ provider "aws" {
 
 # Create a bucket AWS S3
 resource "aws_s3_bucket" "s3_example" {
-  bucket = "bucket-s3-cmerchan"
+  bucket = "bucket-flugel"
   acl    = "private" # or can be "public-read"
   tags = {
     Name        = "Flugel"
@@ -44,7 +44,7 @@ resource "aws_instance" "ec2_example" {
 
 # variables for automation testing
 output "bucket_id" {
-  value = aws_s3_bucket.s3_example.id
+  value = aws_s3_bucket.s3_example.tags.Name
 }
 output "instance_id" {
   value = aws_instance.ec2_example.tags.Name
