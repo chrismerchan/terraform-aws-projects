@@ -37,7 +37,7 @@ import (
   
 	// Get the bucket ID so we can query AWS
 	bucketID := terraform.Output(t, terraformOpts, "bucket_id")
-
+  
 	// Get the EC2 Instance ID so we can query AWS
 	instanceID := terraform.Output(t, terraformOpts, "instance_id")
 
