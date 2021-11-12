@@ -71,10 +71,14 @@ jobs:
       with:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-    - name: settings
+    - name: Setup github
       working-directory: /Users/chrismerchan/Documents/GitHub/terraform-aws-projects/tests
-      run: go mod init "github.com/chrismerchan/aws_s3_terratest" && go get -v -t -d && go mod tidy
+      run: go mod init "github.com/chrismerchan/aws_s3_terratest"
 
-    - name: terratest test
+    - name: Dependencies
       working-directory: /Users/chrismerchan/Documents/GitHub/terraform-aws-projects/tests
-      run: go test -v
+      run: go mod tidy  
+
+    - name: Terratest
+      working-directory: /Users/chrismerchan/Documents/GitHub/terraform-aws-projects/tests
+      run: go test -v -run TestS3EC2 -timeout 30m
