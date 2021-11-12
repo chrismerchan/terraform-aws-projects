@@ -44,8 +44,9 @@ resource "aws_instance" "ec2_example" {
 
 # variables for automation testing
 output "bucket_id" {
-  value = aws_s3_bucket.s3_example.tags.Name
+  value = "${aws_s3_bucket.s3_example.tags.Name}"
 }
+
 output "instance_id" {
-  value = aws_instance.ec2_example.tags.Name
+  value = "${aws_instance.ec2_example.tags.Name}"
 }
