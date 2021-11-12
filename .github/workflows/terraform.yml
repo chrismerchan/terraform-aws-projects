@@ -51,14 +51,6 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        directory: ["./main"]
-        
-    defaults:
-      run:
-        working-directory: ${{ matrix.directory }}
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -75,13 +67,13 @@ jobs:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
     - name: Setup github
-      working-directory: "/Users/chrismerchan/Documents/GitHub/terraform-aws-projects/tests/"
+      working-directory: "/home/runner/work/terraform-aws-projects/terraform-aws-projects/tests/"
       run: go mod init "github.com/chrismerchan/aws_s3_terratest"
 
     - name: Dependencies
-      working-directory: "/Users/chrismerchan/Documents/GitHub/terraform-aws-projects/tests/"
+      working-directory: "/home/runner/work/terraform-aws-projects/terraform-aws-projects/tests/"
       run: go mod tidy  
 
     - name: Terratest
-      working-directory: "/Users/chrismerchan/Documents/GitHub/terraform-aws-projects/tests/"
+      working-directory: "/home/runner/work/terraform-aws-projects/terraform-aws-projects/tests/"
       run: go test -v -run TestS3EC2 -timeout 30m
