@@ -2,7 +2,8 @@ package tests
 
 import (
 	"testing"
-  
+
+	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
   )
@@ -30,37 +31,15 @@ import (
   
 	// Deploy the infrastructure with the options defined above
 	terraform.InitAndApply(t, terraformOpts)
-  
-  	//////////////////////////////////
-	// Error Trace:	output.go:19
-	// ec2_s3_test.go:39
-	// Error:      	Received unexpected error:
-	//				invalid character 'c' looking for beginning of value
-	// Test:       	TestS3EC2
-	/////////////////////////////////
 
 	// Get the bucket ID so we can query AWS
-	bucketID, err1 := terraform.Output(t, terraformOpts, "bucket_id")
-	if err1 != nil {
-		bucketID := "Flugel"
-	}
-
-  	//////////////////////////////////
-	// Error Trace:	output.go:19
-	// ec2_s3_test.go:39
-	// Error:      	Received unexpected error:
-	//				invalid character 'c' looking for beginning of value
-	// Test:       	TestS3EC2
-	/////////////////////////////////
+	bucketID := terraform.Output(t, terraformOpts, "bucket_id")
 
 	// Get the EC2 Instance ID so we can query AWS
-	instanceID, err2 := terraform.Output(t, terraformOpts, "instance_id")
-	if err2 != nil {
-		instanceID := "Flugel"
-	}
+	instanceID := terraform.Output(t, terraformOpts, "instance_id")
+
 	// check exists bucket AWS S3
-	//aws.AssertS3BucketExists(t, awsRegion, bucketID)
-	assert.Contains(t, bucketID, "Flugel")
+	aws.AssertS3BucketExists(t, awsRegion, bucketID)
 	// check exists instance EC2
 	assert.Contains(t, instanceID, "Flugel")
   }
