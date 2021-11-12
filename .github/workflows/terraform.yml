@@ -54,7 +54,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        directory:["./main"]
+        directory: ["./main"]
     defaults:
       run:
         working-directory: ${{ matrix.directory }}
