@@ -71,7 +71,7 @@ jobs:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
     - name: settings
-        working-directory: ./tests/
+        working-directory: ../../tests/
         run: go mod init "github.com/chrismerchan/aws_s3_terratest" && go get -v -t -d && go mod tidy
 
       - name: terratest test
