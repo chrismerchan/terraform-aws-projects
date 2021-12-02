@@ -48,6 +48,5 @@ output "bucket_id" {
 }
 
 output "instance_id" {
-  //value = "${aws_instance.ec2_example.tags.Name}"
   value = trimspace(aws_instance.ec2_example.tags.Name)
 }
